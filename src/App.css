@@ -1,0 +1,157 @@
+/* Body and app layout */
+body {
+  background: #1e1e1e;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Input and add button */
+.input-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.input-container input {
+  padding: 10px;
+  width: 70%;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #333;
+}
+
+/* Todo list */
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* Each todo item */
+.todo-item, li {
+  display: flex;
+  flex-direction: column; /* text on top, buttons below */
+  align-items: flex-start;
+  margin: 8px 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #2a2a2a;
+}
+
+/* Action buttons inside each todo */
+.actions {
+  display: flex; /* horizontal buttons */
+  flex-direction: row; /* side by side */
+  gap: 10px; /* spacing between buttons */
+  margin-top: 8px; /* space between text and buttons */
+}
+
+.actions button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: auto; /* fit content */
+}
+
+/* Edit button */
+.edit-btn {
+  background: #ff9800;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #e68900;
+}
+
+/* Delete button */
+.delete-btn {
+  background: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #d32f2f;
+}
+
+/* Original root and other styles from old app.css */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
