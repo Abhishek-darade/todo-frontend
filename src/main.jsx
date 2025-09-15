@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 
-const baseUrl = "http://localhost:3001/todos";
+const API_URL = import.meta.env.VITE_API_URL;  // ✅ आता env variable वापरतोय
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -13,14 +13,14 @@ function App() {
   }, []);
 
   const fetchTodos = () => {
-    fetch(baseUrl)
+    fetch(API_URL)
       .then(res => res.json())
       .then(data => setTodos(data));
   };
 
   const addTodo = () => {
     if (!newTodo.trim()) return;
-    fetch(baseUrl, {
+    fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: newTodo, completed: false })
@@ -35,7 +35,7 @@ function App() {
   const updateTodo = (id) => {
     const title = prompt("Edit todo:");
     if (!title) return;
-    fetch(`${baseUrl}/${id}`, {   // ✅ FIXED
+    fetch(`${API_URL}/${id}`, {   // ✅ env var वापरतोय
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, completed: false })
@@ -45,7 +45,7 @@ function App() {
   };
 
   const deleteTodo = (id) => {
-    fetch(`${baseUrl}/${id}`, { method: "DELETE" })   // ✅ FIXED
+    fetch(`${API_URL}/${id}`, { method: "DELETE" })   // ✅ env var वापरतोय
       .then(() => fetchTodos());
   };
 
@@ -73,7 +73,6 @@ function App() {
           </li>
         ))}
       </ul>
-
     </div>
   );
 }
