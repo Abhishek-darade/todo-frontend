@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL;   // ✅ env var वापरतोय
-
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
@@ -10,7 +8,7 @@ function App() {
 
   // Get all todos
   useEffect(() => {
-    fetch(API_URL)
+    fetch("http://localhost:3001/todos")
       .then((res) => res.json())
       .then((data) => setTodos(data))
       .catch((err) => console.error("Fetch todos error:", err));
@@ -20,7 +18,7 @@ function App() {
   const handleAdd = async () => {
     if (!newTodo.trim()) return;
     try {
-      const res = await fetch(API_URL, {
+      const res = await fetch("http://localhost:3001/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: newTodo }),
@@ -36,7 +34,7 @@ function App() {
   // Delete todo
   const handleDelete = async (id) => {
     try {
-      await fetch(`${API_URL}/${id}`, { method: "DELETE" }); // ✅ env var वापरतोय
+      await fetch(`http://localhost:3001/todos/${id}`, { method: "DELETE" }); // ✅ FIXED
       setTodos(todos.filter((todo) => todo._id !== id));
     } catch (err) {
       console.error("Delete todo error:", err);
@@ -46,7 +44,7 @@ function App() {
   // Save updated todo
   const handleUpdate = async (id) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {   // ✅ env var वापरतोय
+      const res = await fetch(`http://localhost:3001/todos/${id}`, {   // ✅ FIXED
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: editText }),
@@ -78,7 +76,7 @@ function App() {
 
       <ol>
         {todos.map((todo) => (
-          <li key={todo._id}>
+          <li key={todo._id}>   {/* ✅ FIXED */}
             {editingId === todo._id ? (
               <>
                 <input
