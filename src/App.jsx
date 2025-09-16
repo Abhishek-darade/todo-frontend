@@ -6,9 +6,12 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
 
+  // Base URL ✅ (no localhost)
+  const baseUrl = "/todos";
+
   // Get all todos
   useEffect(() => {
-    fetch("http://localhost:3001/todos")
+    fetch(baseUrl)
       .then((res) => res.json())
       .then((data) => setTodos(data))
       .catch((err) => console.error("Fetch todos error:", err));
@@ -18,7 +21,7 @@ function App() {
   const handleAdd = async () => {
     if (!newTodo.trim()) return;
     try {
-      const res = await fetch("http://localhost:3001/todos", {
+      const res = await fetch(baseUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: newTodo }),
@@ -34,7 +37,7 @@ function App() {
   // Delete todo
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:3001/todos/${id}`, { method: "DELETE" }); // ✅ FIXED
+      await fetch(`${baseUrl}/${id}`, { method: "DELETE" });
       setTodos(todos.filter((todo) => todo._id !== id));
     } catch (err) {
       console.error("Delete todo error:", err);
@@ -44,7 +47,7 @@ function App() {
   // Save updated todo
   const handleUpdate = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3001/todos/${id}`, {   // ✅ FIXED
+      const res = await fetch(`${baseUrl}/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: editText }),
@@ -76,7 +79,7 @@ function App() {
 
       <ol>
         {todos.map((todo) => (
-          <li key={todo._id}>   {/* ✅ FIXED */}
+          <li key={todo._id}>
             {editingId === todo._id ? (
               <>
                 <input

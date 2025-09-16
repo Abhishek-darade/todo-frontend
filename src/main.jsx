@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 
-const baseUrl = "http://localhost:3001/todos";
+// ✅ Localhost काढून टाकलं
+const baseUrl = "/todos";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -35,7 +36,7 @@ function App() {
   const updateTodo = (id) => {
     const title = prompt("Edit todo:");
     if (!title) return;
-    fetch(`${baseUrl}/${id}`, {   // ✅ FIXED
+    fetch(`${baseUrl}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, completed: false })
@@ -45,7 +46,7 @@ function App() {
   };
 
   const deleteTodo = (id) => {
-    fetch(`${baseUrl}/${id}`, { method: "DELETE" })   // ✅ FIXED
+    fetch(`${baseUrl}/${id}`, { method: "DELETE" })
       .then(() => fetchTodos());
   };
 
@@ -73,7 +74,6 @@ function App() {
           </li>
         ))}
       </ul>
-
     </div>
   );
 }
